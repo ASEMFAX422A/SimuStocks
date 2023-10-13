@@ -25,6 +25,7 @@ logs/
 
 # OS-specific files
 .DS_Store
+.DS_Store/
 Thumbs.db
 
 # IDEs and text editors
