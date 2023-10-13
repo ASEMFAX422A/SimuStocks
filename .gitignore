@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+
+# MongoDB files
+*.lock
+mongod.log
+
+# Flask instance-specific files
+instance/
+*.sqlite
+*.db
+
+# Logs
+logs/
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and text editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.sav
+*.save
+*.bak
+*.log
+*.sublime*
+*.tmuxp
+*.tmux
+
+# Frontend files
+node_modules/
+
+# Bootstrap files (if you're using local copies)
+bootstrap/
+
