@@ -44,7 +44,3 @@ Thumbs.db
 
 # Frontend files
 node_modules/
-
-# Bootstrap files (if you're using local copies)
-bootstrap/
-
