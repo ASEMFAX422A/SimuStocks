@@ -19,8 +19,8 @@ configs = {
 mode = os.environ.get('SIMU_MODE', 'dev')
 app.config.from_object(configs[mode])
 
-db = MongoEngine(app)
-app.session_interface = MongoEngineSessionInterface(db)
+#db = MongoEngine(app)
+#app.session_interface = MongoEngineSessionInterface(db)
 
 
 @app.route('/')
