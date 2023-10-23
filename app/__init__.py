@@ -23,6 +23,4 @@ app.config.from_object(configs[mode])
 #app.session_interface = MongoEngineSessionInterface(db)
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+from . import controllers
