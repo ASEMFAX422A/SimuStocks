@@ -19,8 +19,15 @@ configs = {
 mode = os.environ.get('SIMU_MODE', 'dev')
 app.config.from_object(configs[mode])
 
-#db = MongoEngine(app)
-#app.session_interface = MongoEngineSessionInterface(db)
+db = MongoEngine(app)
+app.session_interface = MongoEngineSessionInterface(db)
+
+from .models import *
+
+current_run = AppRun(version=app.config["VERSION"],
+                     version_id=app.config["VERSION_ID"],
+                     mode=app.config['SIMU_MODE'])
+current_run.save()
 
 
 from . import controllers
