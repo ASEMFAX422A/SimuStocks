@@ -66,6 +66,25 @@ services:
     networks:
       - frontend
 
+  scrubber:
+    build:
+      context: scrubber
+      dockerfile: Dockerfile
+    container_name: scrubber
+    image: digitalocean.com/flask-python:3.10.6
+    restart: unless-stopped
+    environment:
+      MONGODB_DATABASE: flaskdb
+      MONGODB_USERNAME: mongodbuser
+      MONGODB_PASSWORD: your_mongodb_root_password
+      MONGODB_HOSTNAME: mongodb
+    volumes:
+      - ./scrubber:/app
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+
 networks:
   frontend:
     driver: bridge
