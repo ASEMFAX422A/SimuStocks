@@ -1,6 +1,6 @@
+# SimuApp/app/__init__.py
 import json
-import logging
-import os
+import logging, os, threading, time
 from flask import Flask, session, request, g, redirect, url_for, render_template
 from flask_login import LoginManager, AnonymousUserMixin, current_user
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
@@ -8,57 +8,76 @@ from flask_socketio import SocketIO, disconnect
 from flask_wtf import CSRFProtect
 from logging import StreamHandler, Formatter
 from logging.handlers import SMTPHandler
+from datetime import datetime
 
-app = Flask(__name__)
-
-configs = {
-    'dev': 'config_dev',
-    'test': 'config_test',
-    'prod': 'config_prod'
-}
-
-mode = os.environ.get('SIMU_MODE', 'dev')
-app.config.from_object(configs[mode])
-
-db = MongoEngine(app)
-app.session_interface = MongoEngineSessionInterface(db)
-
+db = MongoEngine()
 login_manager = LoginManager()
 
-from .models import *
 
-current_run = AppRun(version=app.config["VERSION"],
-                     version_id=app.config["VERSION_ID"],
-                     mode=app.config['SIMU_MODE'])
-current_run.save()
+def post_initialization(app):
+    app.logger.debug("App has been initialized")
 
 
-class Anonymous(AnonymousUserMixin):
-    def __init__(self):
-        self.name = "Anonymous User"
+def create_app():
+    app = Flask(__name__)
 
+    configs = {
+        'dev': 'config_dev',
+        'test': 'config_test',
+        'prod': 'config_prod'
+    }
 
-class MongoHandler(StreamHandler):
-    def __init__(self):
-        StreamHandler.__init__(self)
+    mode = os.environ.get('SIMU_MODE', 'dev')
+    app.config.from_object(configs[mode])
 
-    def emit(self, record):
-        time = datetime.fromtimestamp(record.created)
-        ApplicationLog(time=time,
-                       levelname=record.levelname,
-                       module=record.module,
-                       msg=record.msg,
-                       appRun=current_run).save()
+    db.init_app(app)
+    app.session_interface = MongoEngineSessionInterface(db)
 
+    login_manager.init_app(app)
+    login_manager.login_view = "login"
+    login_manager.login_message = None
 
-mongologger = MongoHandler()
-mongologger.setLevel(logging.NOTSET)
-mongologger.setFormatter(Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-app.logger.addHandler(mongologger)
+    from .models import AppRun, ApplicationLog
 
-login_manager.init_app(app)
-login_manager.login_view = "login"
-login_manager.login_message = None
-login_manager.anonymous_user = Anonymous
+    current_run = AppRun(version=app.config["VERSION"],
+                         version_id=app.config["VERSION_ID"],
+                         mode=app.config['SIMU_MODE'])
+    current_run.save()
 
-from . import controllers
+    class Anonymous(AnonymousUserMixin):
+        def __init__(self):
+            self.name = "Anonymous User"
+
+    class MongoHandler(StreamHandler):
+        def __init__(self):
+            StreamHandler.__init__(self)
+
+        def emit(self, record):
+            time = datetime.fromtimestamp(record.created)
+            ApplicationLog(time=time,
+                           levelname=record.levelname,
+                           module=record.module,
+                           msg=record.msg,
+                           appRun=current_run).save()
+
+    mongologger = MongoHandler()
+    mongologger.setLevel(logging.NOTSET)
+    mongologger.setFormatter(Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    app.logger.addHandler(mongologger)
+
+    def log_alive_status():
+        while True:
+            app.logger.debug("App is running")
+            time.sleep(60)  # 60 Sekunden schlafen
+
+    alive_thread = threading.Thread(target=log_alive_status)
+    alive_thread.daemon = True  # Beenden Sie den Thread, wenn die Hauptanwendung beendet wird
+    alive_thread.start()
+
+    from .controllers import main, init_app
+    init_app(login_manager)
+    app.register_blueprint(main)
+
+    post_initialization(app)
+
+    return app

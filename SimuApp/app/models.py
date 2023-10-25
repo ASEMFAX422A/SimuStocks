@@ -1,9 +1,9 @@
-from app import db, app
-app.logger.debug("Starting imports")
+# SimuApp/app/models.py
+from flask import current_app as app
+from . import db
 
 from datetime import datetime, timedelta, date, time
 from flask_mongoengine import BaseQuerySet
-app.logger.debug("Finished imports")
 
 
 class TimestampedModel(object):

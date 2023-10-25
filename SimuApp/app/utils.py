@@ -20,14 +20,16 @@ def redirect_url(default='index'):
            url_for(default)
 
 
-def safe_cast(val, to_type, default=None):
-    from app import app
+# SimuApp/app/utils.py
+
+def safe_cast(val, to_type, app, default=None):
     if type(val) == to_type:
-        app.logger.debug("Tryed to convert %s of type %s to %s but its alredy" % (val, type(val), to_type))
+        app.logger.debug(f"Tried to convert {val} of type {type(val)} to {to_type} but it's already")
         return val
     try:
         return to_type(val)
     except (ValueError, TypeError):
-        app.logger.critical("Error on converting a Value")
+        app.logger.critical("Error on converting a value")
         return default
+
 
