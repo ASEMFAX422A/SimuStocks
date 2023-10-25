@@ -20,7 +20,7 @@ def connect_to_db():
             if not all([isinstance(v, str) for v in [mongo_user, mongo_pass, mongo_host, mongo_db]]):
                 raise ValueError("All MongoDB settings must be provided as strings.")
 
-            db_client = MongoClient(f"mongodb://{mongo_user}:{mongo_pass}@{mongo_host}:{mongo_port}/{mongo_db}?authMechanism=DEFAULT",
+            db_client = MongoClient(f"mongodb://{mongo_user}:{mongo_pass}@{mongo_host}:{mongo_port}/?authMechanism=DEFAULT",
                                     maxPoolSize=50)[mongo_db]
         except (ConnectionFailure, ValueError) as e:
             print(f"Could not connect to MongoDB, retrying... {e}")

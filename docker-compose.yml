@@ -5,7 +5,6 @@ services:
       context: SimuApp
       dockerfile: Dockerfile
     container_name: flask
-    image: digitalocean.com/flask-python:3.10.6
     restart: unless-stopped
     environment:
       APP_ENV: "dev"
@@ -49,7 +48,6 @@ services:
     build:
       context: nginx
       dockerfile: Dockerfile
-    image: digitalocean.com/webserver:latest
     container_name: webserver
     restart: unless-stopped
     environment:
