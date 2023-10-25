@@ -12,6 +12,7 @@ def create_job(ticker):
 
     return job
 
+
 if __name__ == "__main__":
     tickers = ["AAPL", "MSFT", "GOOGL", "EOAN.DE"]
 
