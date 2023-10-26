@@ -17,7 +17,7 @@ services:
       MONGODB_PASSWORD: your_mongodb_root_password
       MONGODB_HOSTNAME: mongodb
     ports:
-      - "6000:5000"
+      - "5000:5000"
     volumes:
       - ./SimuApp:/var/www
     depends_on:
