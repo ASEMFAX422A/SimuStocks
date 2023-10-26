@@ -7,6 +7,9 @@ main = Blueprint('main', __name__)
 
 login_manager = None  # Initialisieren Sie login_manager als None
 
+from .models import *
+
+
 def init_app(lm):
     global login_manager
     login_manager = lm
