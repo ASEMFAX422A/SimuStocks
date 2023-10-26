@@ -56,7 +56,7 @@ class ApplicationLog(db.DynamicDocument):
     appRun = db.ReferenceField('AppRun', required=True)
 
 
-class User(UserMixin, db.Document, ZGBaseModell):
+class User(UserMixin, db.Document, SimuBaseModell):
     firstname = db.StringField(required=True)
     lastname = db.StringField(required=True)
     email = db.EmailField(required=True, unique=True)
