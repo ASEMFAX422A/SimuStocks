@@ -1,4 +1,6 @@
 # SimuApp/app/models.py
+import cryptocode
+
 from flask import current_app as app
 from . import db
 
