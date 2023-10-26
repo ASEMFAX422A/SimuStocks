@@ -2,6 +2,7 @@
 
 from SimuApp.app import create_app  # Pfad zur create_app Funktion
 from SimuApp.app.models import User
+from mongomock import MongoClient
 from flask import url_for
 from flask_login import login_user, logout_user
 import unittest
@@ -10,7 +11,7 @@ import unittest
 class TestControllers(unittest.TestCase):
 
     def setUp(self):
-        self.app = create_app()
+        self.app = create_app(testing=True)
         self.app.config['SERVER_NAME'] = 'localhost.de:5000'
         self.client = self.app.test_client()
         self.user = User(firstname="Test", lastname="User", email="test@user.com")

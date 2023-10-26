@@ -1,6 +1,6 @@
 # SimuApp/app/__init__.py
 import json
-import logging, os, threading, time
+import logging, os, threading, time, mongomock
 from flask import Flask, session, request, g, redirect, url_for, render_template
 from flask_login import LoginManager, AnonymousUserMixin, current_user
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
@@ -9,6 +9,8 @@ from flask_wtf import CSRFProtect
 from logging import StreamHandler, Formatter
 from logging.handlers import SMTPHandler
 from datetime import datetime
+from mongomock import MongoClient as MockMongoClient
+from mongoengine import connect
 
 db = MongoEngine()
 login_manager = LoginManager()
@@ -18,7 +20,7 @@ def post_initialization(app):
     app.logger.debug("App has been initialized")
 
 
-def create_app():
+def create_app(testing=False):
     app = Flask(__name__)
 
     configs = {
@@ -30,8 +32,14 @@ def create_app():
     mode = os.environ.get('SIMU_MODE', 'dev')
     app.config.from_object(configs[mode])
 
-    db.init_app(app)
-    app.session_interface = MongoEngineSessionInterface(db)
+    if testing:
+        connect(db='mydb', alias='default', mongo_client_class=mongomock.MongoClient)
+    else:
+        db = MongoEngine()
+        db.init_app(app)
+        app.session_interface = MongoEngineSessionInterface(db)
+
+
 
     login_manager.init_app(app)
     login_manager.login_view = "login"
