@@ -4,6 +4,7 @@ from . import db
 
 from datetime import datetime, timedelta, date, time
 from flask_mongoengine import BaseQuerySet
+from flask_login import UserMixin, current_user
 
 
 class TimestampedModel(object):
