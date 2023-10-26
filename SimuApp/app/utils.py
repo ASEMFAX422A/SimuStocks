@@ -2,7 +2,7 @@ import random
 import bson
 
 from datetime import date
-
+from flask import request, url_for
 from dateutil.parser import parse
 
 
@@ -31,5 +31,3 @@ def safe_cast(val, to_type, app, default=None):
     except (ValueError, TypeError):
         app.logger.critical("Error on converting a value")
         return default
-
-
