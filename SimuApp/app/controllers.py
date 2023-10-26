@@ -23,7 +23,7 @@ def produce_debug():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.debug("Debug was produced by Anonymous")
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 
 @main.route("/produce_info")
@@ -33,7 +33,7 @@ def produce_info():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.info("Info was produced by Anonymous")
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 
 @main.route("/produce_warning")
@@ -43,7 +43,7 @@ def produce_warning():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.warning("Warning was produced by Anonymous")
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 
 @main.route("/produce_error")
@@ -53,7 +53,7 @@ def produce_error():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.error("Error was produced by Anonymous")
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 
 @main.route("/produce_critical")
@@ -63,7 +63,7 @@ def produce_critical():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.critical("CRITICAL was produced by Anonymous")
-    return redirect(url_for('index'))
+    return redirect(url_for('main.index'))
 
 
 @main.route('/')
