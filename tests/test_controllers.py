@@ -1,7 +1,7 @@
 # SimuApp/tests/test_controllers.py
 import unittest
 from flask import url_for
-from app import create_app
+from SimuApp.app import create_app
 
 class TestControllers(unittest.TestCase):
 
