@@ -11,6 +11,13 @@ SimuStocks is a project that simulates stock-related functionalities. The projec
 
 - **[test.py](https://github.com/ASEMFAX422A/SimuStocks/blob/main/test.py)**: A simple Python script for testing purposes.
 
+## Design and Architecture Patterns
+
+- **Application Factory Pattern**: Used for the dynamic creation of the Flask app instance.
+- **Configuration Management**: Separate configuration settings based on the environment (default, development, etc.).
+- **Database Configuration**: Use of MongoDB with MongoEngine for database operations.
+- **Custom Logging**: Implementation of custom logging where logs are saved to the MongoDB database.
+
 ## Setup & Run
 
 1. Clone the repository.
@@ -21,9 +28,19 @@ SimuStocks is a project that simulates stock-related functionalities. The projec
 
 The `docker-compose.yml` file contains environment variables that can be modified as per your requirements. Ensure to update the MongoDB credentials and other relevant configurations before running the project.
 
-## Time intervals
-Following time intervals sawn as functional:
-Day = 10 min
-Week = 1 hour
-Month = 4 hours
-Year = 1 day
+## Instructions
+
+### Running Tests Locally
+To run all tests locally, use the following command:
+```
+python -m unittest discover tests
+```
+### Building Docker Containers
+To build all Docker containers, use:
+```
+docker-compose up -d --build
+```
+If you wish to rebuild a specific container, for example `flask`, use:
+```
+docker-compose up -d --build flask
+```
