@@ -1,9 +1,12 @@
-from app import db, app
-app.logger.debug("Starting imports")
+# SimuApp/app/models.py
+import cryptocode
+
+from flask import current_app as app
+from . import db
 
 from datetime import datetime, timedelta, date, time
 from flask_mongoengine import BaseQuerySet
-app.logger.debug("Finished imports")
+from flask_login import UserMixin, current_user
 
 
 class TimestampedModel(object):
@@ -22,6 +25,13 @@ class SimuBaseModell():
     @property
     def public_id(self):
         return cryptocode.encrypt(str(self.id), app.config["PUBLIC_ID_KEY"])
+
+
+class ObjectChangelog(db.EmbeddedDocument, SimuBaseModell):
+    time = db.DateTimeField(default=datetime.now)
+    modified_by = db.ReferenceField('User')
+    note = db.StringField()
+    data = db.DictField()
 
 
 class AppRun(db.DynamicDocument):
@@ -48,4 +58,29 @@ class ApplicationLog(db.DynamicDocument):
     msg = db.StringField(required=True)  # msg
     appRun = db.ReferenceField('AppRun', required=True)
 
+
+class User(UserMixin, db.Document, SimuBaseModell):
+    firstname = db.StringField(required=True)
+    lastname = db.StringField(required=True)
+    email = db.EmailField(required=True, unique=True)
+
+    login_times = db.ListField(db.DateTimeField(default=datetime.now))
+
+    enabled = db.BooleanField(default=True)
+    changelog = db.EmbeddedDocumentListField(ObjectChangelog)
+
+    @property
+    def last_login(self):
+        if len(self.login_times) > 0:
+            return self.login_times[-1]
+        else:
+            return None
+
+    @property
+    def full_name(self):
+        return self.firstname + " " + self.lastname
+
+    @property
+    def full_name_rev(self):
+        return self.firstname + ", " + self.lastname
 
