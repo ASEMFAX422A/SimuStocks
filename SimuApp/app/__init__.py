@@ -26,10 +26,11 @@ def create_app(testing=False):
     configs = {
         'dev': 'config_dev',
         'test': 'config_test',
-        'prod': 'config_prod'
+        'prod': 'config_prod',
+        'testing': 'SimuApp.config_testing'
     }
 
-    mode = os.environ.get('SIMU_MODE', 'dev')
+    mode = os.environ.get('SIMU_MODE', 'testing')
     app.config.from_object(configs[mode])
 
     if testing:
