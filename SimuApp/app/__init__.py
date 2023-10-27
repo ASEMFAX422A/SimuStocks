@@ -70,7 +70,7 @@ def create_app(testing=False):
 
     mongologger = MongoHandler()
     mongologger.setLevel(logging.NOTSET)
-    mongologger.setFormatter(Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    mongologger.setFormatter(Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')) #TODO: WHY
     app.logger.addHandler(mongologger)
 
     def log_alive_status():
