@@ -3,7 +3,7 @@ from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 from datetime import datetime
 
-# Globale Variable für die MongoDB-Verbindung
+# Global var for saving MongoDB connection
 db_client = None
 
 
@@ -29,7 +29,7 @@ def connect_to_db():
 
 def save_data(price, ticker):
     if db_client is None:
-        connect_to_db()  # Versucht, die Verbindung herzustellen oder wiederherzustellen
+        connect_to_db()  # Try to connect or Reconnect if lost connection
     if db_client is not None:
         collection = db_client['Prices']
         timestamp = datetime.utcnow().isoformat()
@@ -41,5 +41,5 @@ def save_data(price, ticker):
         )
 
 
-# Verbindung beim Start der Anwendung initialisieren
+# Initialize MongoDB connection on Startup
 connect_to_db()

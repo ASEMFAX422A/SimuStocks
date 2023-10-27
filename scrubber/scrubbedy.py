@@ -12,9 +12,11 @@ def create_job(ticker):
 
     return job
 
+
 if __name__ == "__main__":
     print("staring logger")
     tickers = ["AAPL", "MSFT", "GOOGL", "EOAN.DE"]
+    #TODO: Put all wanted Companys into Database
 
     for ticker in tickers:
         job = create_job(ticker)
