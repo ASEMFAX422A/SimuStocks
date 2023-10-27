@@ -11,20 +11,24 @@ def is_valid_object_id(string):
 
 
 def random_string(length):
-    return ''.join(random.choice('abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789') for x in range(length))
+    return "".join(
+        random.choice("abcdefghjkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789")
+        for x in range(length)
+    )
 
 
-def redirect_url(default='index'):
-    return request.args.get('next') or \
-           request.referrer or \
-           url_for(default)
+def redirect_url(default="index"):
+    return request.args.get("next") or request.referrer or url_for(default)
 
 
 # SimuApp/app/utils.py
 
+
 def safe_cast(val, to_type, app, default=None):
     if type(val) == to_type:
-        app.logger.debug(f"Tried to convert {val} of type {type(val)} to {to_type} but it's already")
+        app.logger.debug(
+            f"Tried to convert {val} of type {type(val)} to {to_type} but it's already"
+        )
         return val
     try:
         return to_type(val)

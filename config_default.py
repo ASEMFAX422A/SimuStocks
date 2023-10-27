@@ -12,8 +12,8 @@ FLASK_RUN_PORT = 5000
 # operations using the other.
 THREADS_PER_PAGE = 2
 
-MONGODB_DB = 'default'
-MONGODB_HOST = 'localhost'
+MONGODB_DB = "default"
+MONGODB_HOST = "localhost"
 MONGODB_PORT = 27017
 
 WTF_CSRF_TIME_LIMIT = 36000

@@ -8,7 +8,9 @@ print("Hallo, Welt! Ich bin ein Python-Programm.")
 # Variablen und Datentypen
 name = "John"
 age = 30
-print(f"{name} ist {age} Jahre alt. Alt genug, um besser zu wissen, aber jung genug, um es trotzdem zu tun.")
+print(
+    f"{name} ist {age} Jahre alt. Alt genug, um besser zu wissen, aber jung genug, um es trotzdem zu tun."
+)
 
 # Bedingungen
 if age > 18:
@@ -32,9 +34,11 @@ print(f"Zufallszahl des Tages: {random_number}. Spiele Lotto!")
 sqrt_result = math.sqrt(random_number)
 print(f"Die Quadratwurzel der Zufallszahl ist: {sqrt_result:.2f}. Beeindruckend, oder?")
 
+
 # Funktionen
 def greet(name):
     return f"Hallo, {name}! Wie geht's?"
+
 
 print(greet("Alice"))
 
