@@ -1,0 +1,28 @@
+{% extends '_main_simple.html' %}
+{% block title %}Error{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
+
+        <div class="d-flex justify-content-center py-4">
+            <a class="login-logo d-flex align-items-center w-auto" href="{{ url_for('main.index') }}">
+                <img alt="" src="{{ url_for('static', filename='img/simu-logo.png') }}">
+            </a>
+        </div><!-- End Logo -->
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Error</h5>
+                    <p class="text-center small">Ein aktuell unbekannter Fehler ist aufgetreten.</p>
+                    <hr>
+                    <p class="text-center"><a class="text-center" href="{{ url_for('main.index') }}">Zur Startseite</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

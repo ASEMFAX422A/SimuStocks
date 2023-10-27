@@ -21,3 +21,9 @@ SimuStocks is a project that simulates stock-related functionalities. The projec
 
 The `docker-compose.yml` file contains environment variables that can be modified as per your requirements. Ensure to update the MongoDB credentials and other relevant configurations before running the project.
 
+## Time intervals
+Following time intervals sawn as functional:
+Day = 10 min
+Week = 1 hour
+Month = 4 hours
+Year = 1 day

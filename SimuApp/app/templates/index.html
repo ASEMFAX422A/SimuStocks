@@ -1,0 +1,50 @@
+{% extends '_main.html' %}
+{% set active_page = "index" %}
+{% block title %}Startseite{% endblock %}
+
+{% block body %}
+<div class="pagetitle">
+    <h1>Startseite</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('main.index') }}">Home</a></li>
+            <li class="breadcrumb-item active">Startseite</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section dashboard">
+    <div class="row">
+        <div class="col-lg-6">
+            <a href="{{ url_for('main.index') }}">
+                <div class="card">
+                    <div class="card-body text-center pt-4 d-flex flex-column align-items-center">
+                        <span class="material-icons align-middle" style="font-size: 4rem;">home</span>
+                        <h2>Startseite</h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-6">
+            <a href="{{ url_for('main.index') }}">
+                <div class="card">
+                    <div class="card-body text-center pt-4 d-flex flex-column align-items-center">
+                        <span class="material-icons align-middle" style="font-size: 4rem;">home</span>
+                        <h2>Startseite</h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-6">
+            <a href="{{ url_for('main.index') }}">
+                <div class="card">
+                    <div class="card-body text-center pt-4 d-flex flex-column align-items-center">
+                        <span class="material-icons align-middle" style="font-size: 4rem;">home</span>
+                        <h2>Startseite</h2>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
