@@ -17,11 +17,18 @@ def connect_to_db():
             mongo_port = os.environ.get("MONGODB_PORT")
             mongo_db = os.environ.get("MONGODB_DATABASE")
 
-            if not all([isinstance(v, str) for v in [mongo_user, mongo_pass, mongo_host, mongo_db]]):
+            if not all(
+                [
+                    isinstance(v, str)
+                    for v in [mongo_user, mongo_pass, mongo_host, mongo_db]
+                ]
+            ):
                 raise ValueError("All MongoDB settings must be provided as strings.")
 
-            db_client = MongoClient(f"mongodb://{mongo_user}:{mongo_pass}@{mongo_host}:{mongo_port}/?authMechanism=DEFAULT",
-                                    maxPoolSize=50)[mongo_db]
+            db_client = MongoClient(
+                f"mongodb://{mongo_user}:{mongo_pass}@{mongo_host}:{mongo_port}/?authMechanism=DEFAULT",
+                maxPoolSize=50,
+            )[mongo_db]
         except (ConnectionFailure, ValueError) as e:
             print(f"Could not connect to MongoDB, retrying... {e}")
             db_client = None
@@ -31,13 +38,13 @@ def save_data(price, ticker):
     if db_client is None:
         connect_to_db()  # Try to connect or Reconnect if lost connection
     if db_client is not None:
-        collection = db_client['Prices']
+        collection = db_client["Prices"]
         timestamp = datetime.utcnow().isoformat()
 
         collection.update_one(
-            {'ticker': ticker},
-            {'$push': {'data': {'price': price, 'timestamp': timestamp}}},
-            upsert=True
+            {"ticker": ticker},
+            {"$push": {"data": {"price": price, "timestamp": timestamp}}},
+            upsert=True,
         )
 
 

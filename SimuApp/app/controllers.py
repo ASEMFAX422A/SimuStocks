@@ -3,7 +3,7 @@ from flask import current_app as app
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
 
-main = Blueprint('main', __name__)
+main = Blueprint("main", __name__)
 
 login_manager = None  # Initialisieren Sie login_manager als None
 
@@ -27,7 +27,7 @@ def produce_debug():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.debug("Debug was produced by Anonymous")
-    return redirect(url_for('main.index'))
+    return redirect(url_for("main.index"))
 
 
 @main.route("/produce_info")
@@ -37,7 +37,7 @@ def produce_info():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.info("Info was produced by Anonymous")
-    return redirect(url_for('main.index'))
+    return redirect(url_for("main.index"))
 
 
 @main.route("/produce_warning")
@@ -47,7 +47,7 @@ def produce_warning():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.warning("Warning was produced by Anonymous")
-    return redirect(url_for('main.index'))
+    return redirect(url_for("main.index"))
 
 
 @main.route("/produce_error")
@@ -57,7 +57,7 @@ def produce_error():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.error("Error was produced by Anonymous")
-    return redirect(url_for('main.index'))
+    return redirect(url_for("main.index"))
 
 
 @main.route("/produce_critical")
@@ -67,12 +67,12 @@ def produce_critical():
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.critical("CRITICAL was produced by Anonymous")
-    return redirect(url_for('main.index'))
+    return redirect(url_for("main.index"))
 
 
-@main.route('/')
+@main.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
 
 @main.errorhandler(401)
@@ -88,15 +88,20 @@ def http_error_forbidden(e):
 @main.errorhandler(404)
 def http_error_page_not_found(e):
     if current_user.is_authenticated:
-        app.logger.info("%s tryed to Request %s but this doesn't exist" % (current_user, request.path))
+        app.logger.info(
+            "%s tryed to Request %s but this doesn't exist"
+            % (current_user, request.path)
+        )
     else:
-        app.logger.info("unknown User tryed to Request %s but this doesn't exist" % request.endpoint)
-    return render_template('errors/error.html'), 404
+        app.logger.info(
+            "unknown User tryed to Request %s but this doesn't exist" % request.endpoint
+        )
+    return render_template("errors/error.html"), 404
 
 
 @main.errorhandler(500)
 def http_error_internal_server_error(e):
-    return render_template('errors/error.html'), 500
+    return render_template("errors/error.html"), 500
 
 
 @main.errorhandler(Exception)
@@ -106,4 +111,3 @@ def handle_exception(e):
     else:
         app.logger.error("unknown User created UNEXPEDTED ERROR: %s" % e)
     return http_error_internal_server_error(e)
-
