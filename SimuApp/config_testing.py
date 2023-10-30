@@ -1,5 +1,5 @@
 import os
-from datetime import timedelta, datetime
+from datetime import timedelta
 
 # Define the application directory
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -11,6 +11,10 @@ FLASK_RUN_PORT = 5000
 # incoming requests using one and performing background
 # operations using the other.
 THREADS_PER_PAGE = 2
+
+MONGODB_DB = "default"
+MONGODB_HOST = "localhost"
+MONGODB_PORT = 27017
 
 WTF_CSRF_TIME_LIMIT = 36000
 
@@ -26,17 +30,3 @@ VERSION_ID = VERSION.replace(".", "_")
 
 
 DB_VERSION = 1
-
-SIMU_MODE = 'testing'
-
-MONGODB_DB = 'flaskdb'
-MONGODB_HOST = 'mongodb'
-MONGODB_USERNAME = 'mongodbuser'
-MONGODB_PASSWORD = 'your_mongodb_root_password'
-MONGODB_PORT = 27017
-
-DEBUG = True
-
-SECRET_KEY = 'gQ|g(@+Dy.pPOzlsad6daada|9K.j?dsQ8P)9X[Pm(@:#.SQRI7>ZZ[r)tT'
-
-VERSION = VERSION + "-DEV-" + datetime.now().strftime('%Y%m%d%H%M%S')
