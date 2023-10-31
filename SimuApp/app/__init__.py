@@ -23,9 +23,9 @@ def post_initialization(app):
 def create_app(testing=False):
     app = Flask(__name__)
 
-    configs = {"dev": "config_dev", "test": "config_test", "prod": "config_prod"}
+    configs = {"dev": "config_dev", "test": "config_test", "prod": "config_prod", "testing": "SimuApp.config_testing"}
 
-    mode = os.environ.get("SIMU_MODE", "dev")
+    mode = os.environ.get("SIMU_MODE", "testing")
     app.config.from_object(configs[mode])
 
     if testing:
