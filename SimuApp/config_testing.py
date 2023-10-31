@@ -4,6 +4,8 @@ from datetime import timedelta
 # Define the application directory
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
+SIMU_MODE = "testing"
+
 FLASK_RUN_PORT = 5000
 
 # Application threads. A common general assumption is
