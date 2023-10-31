@@ -26,6 +26,8 @@ PERMANENT_SESSION_LIFETIME = timedelta(hours=8)
 
 PUBLIC_ID_KEY = "oReDevVvyyplMkPSjtTVqqIaULBjvEWfzSfOvExBODmJZThhVPnhbMKkHhtPUwymgHLxIF"
 
+SECRET_KEY = "gQ|g(@+Dy.pPOzlsad6daada|9K.j?dsQ8P)9X[Pm(@:#.SQRI7>ZZ[r)tT"
+
 # Current release info
 VERSION = "0.0.1"
 VERSION_ID = VERSION.replace(".", "_")
