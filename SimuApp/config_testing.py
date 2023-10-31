@@ -4,6 +4,8 @@ from datetime import timedelta
 # Define the application directory
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
+SIMU_MODE = "testing"
+
 FLASK_RUN_PORT = 5000
 
 # Application threads. A common general assumption is
@@ -23,6 +25,8 @@ WTF_CSRF_TIME_LIMIT = 36000
 PERMANENT_SESSION_LIFETIME = timedelta(hours=8)
 
 PUBLIC_ID_KEY = "oReDevVvyyplMkPSjtTVqqIaULBjvEWfzSfOvExBODmJZThhVPnhbMKkHhtPUwymgHLxIF"
+
+SECRET_KEY = "gQ|g(@+Dy.pPOzlsad6daada|9K.j?dsQ8P)9X[Pm(@:#.SQRI7>ZZ[r)tT"
 
 # Current release info
 VERSION = "0.0.1"
