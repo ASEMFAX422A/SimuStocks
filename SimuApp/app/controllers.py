@@ -1,4 +1,5 @@
 # SimuApp/app/controllers.py
+from .models import *
 from flask import current_app as app
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
@@ -6,8 +7,6 @@ from flask_login import login_user, logout_user, current_user, login_required
 main = Blueprint("main", __name__)
 
 login_manager = None  # Initialisieren Sie login_manager als None
-
-from .models import *
 
 
 def init_app(lm):
@@ -43,7 +42,8 @@ def produce_info():
 @main.route("/produce_warning")
 def produce_warning():
     if current_user.is_authenticated:
-        app.logger.warning("Warning was produced by %s" % current_user.full_name)
+        app.logger.warning("Warning was produced by %s" %
+                           current_user.full_name)
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.warning("Warning was produced by Anonymous")
@@ -63,7 +63,8 @@ def produce_error():
 @main.route("/produce_critical")
 def produce_critical():
     if current_user.is_authenticated:
-        app.logger.critical("CRITICAL was produced by %s" % current_user.full_name)
+        app.logger.critical("CRITICAL was produced by %s" %
+                            current_user.full_name)
         # current_user.full_name requires we have the function in User model to return full_name
     else:
         app.logger.critical("CRITICAL was produced by Anonymous")
@@ -73,6 +74,16 @@ def produce_critical():
 @main.route("/")
 def index():
     return render_template("index.html")
+
+
+@main.route("/listings")
+def listings():
+    return render_template("stocks/listings.html")
+
+
+@main.route("/portfolio")
+def portfolio():
+    return render_template("stocks/portfolio.html")
 
 
 @main.errorhandler(401)
