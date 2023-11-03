@@ -1,4 +1,5 @@
 # SimuApp/app/controllers.py
+from .models import *
 from flask import current_app as app
 from flask import Blueprint, render_template, redirect, url_for, request
 from flask_login import login_user, logout_user, current_user, login_required
@@ -6,8 +7,6 @@ from flask_login import login_user, logout_user, current_user, login_required
 main = Blueprint("main", __name__)
 
 login_manager = None  # Initialisieren Sie login_manager als None
-
-from .models import *
 
 
 def init_app(lm):
@@ -24,7 +23,8 @@ def init_app(lm):
 def produce_debug():
     if current_user.is_authenticated:
         app.logger.debug("Debug was produced by %s" % current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        # current_user.full_name requires
+        # that we have the function in User model to return full_name
     else:
         app.logger.debug("Debug was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -34,7 +34,8 @@ def produce_debug():
 def produce_info():
     if current_user.is_authenticated:
         app.logger.info("Info was produced by %s" % current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        # current_user.full_name requires
+        # that we have the function in User model to return full_name
     else:
         app.logger.info("Info was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -43,8 +44,10 @@ def produce_info():
 @main.route("/produce_warning")
 def produce_warning():
     if current_user.is_authenticated:
-        app.logger.warning("Warning was produced by %s" % current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        app.logger.warning("Warning was produced by %s" %
+                           current_user.full_name)
+        # current_user.full_name requires
+        # that we have the function in User model to return full_name
     else:
         app.logger.warning("Warning was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -54,7 +57,8 @@ def produce_warning():
 def produce_error():
     if current_user.is_authenticated:
         app.logger.error("Error was produced by %s" % current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        # current_user.full_name requires
+        # that we have the function in User model to return full_name
     else:
         app.logger.error("Error was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -63,8 +67,10 @@ def produce_error():
 @main.route("/produce_critical")
 def produce_critical():
     if current_user.is_authenticated:
-        app.logger.critical("CRITICAL was produced by %s" % current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        app.logger.critical("CRITICAL was produced by %s" %
+                            current_user.full_name)
+        # current_user.full_name requires that
+        # we have the function in User model to return full_name
     else:
         app.logger.critical("CRITICAL was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -73,6 +79,16 @@ def produce_critical():
 @main.route("/")
 def index():
     return render_template("index.html")
+
+
+@main.route("/listings")
+def listings():
+    return render_template("stocks/listings.html")
+
+
+@main.route("/portfolio")
+def portfolio():
+    return render_template("stocks/portfolio.html")
 
 
 @main.errorhandler(401)
@@ -94,7 +110,7 @@ def http_error_page_not_found(e):
         )
     else:
         app.logger.info(
-            "unknown User tryed to Request %s but this doesn't exist" % request.endpoint
+            "unknown User tried to Request %s but this doesn't exist" % request.endpoint
         )
     return render_template("errors/error.html"), 404
 
