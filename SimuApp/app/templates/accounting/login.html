@@ -1,0 +1,52 @@
+{% extends '_main_simple.html' %}
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
+
+        <div class="d-flex justify-content-center py-4">
+            <a class="login-logo d-flex align-items-center w-auto" href="{{ url_for('main.index') }}">
+                <img alt="" src="{{ url_for('static', filename='img/logo.png') }}">
+            </a>
+        </div><!-- End Logo -->
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+
+                <div class="pt-4 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Melde dich an.</h5>
+                    <p class="text-center small">Gib deine E-Mail-Adresse an, um dich anzumelden.</p>
+                </div>
+
+                <form action="{{ url_for('main.login') }}" class="row g-3 mt-2" method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="col-12">
+                        <div class="form-floating">
+                            {{ form.email(class_="form-control", placeholder="E-Mail") }}
+                            <label for="email">E-Mail</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="btn btn-primary w-100" type="submit">Login</button>
+                    </div>
+                    <hr>
+                    <div class="col-12">
+                        <div class="form-check">
+                            {{ form.remember_me(class_="form-check-input") }}
+                            {{ form.remember_me.label(class_="form-check-label") }}
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p class="small mb-0">Neu? <a href="{{ url_for('main.register') }}">Erstelle deinen
+                            Account</a></p>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

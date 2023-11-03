@@ -23,7 +23,12 @@ def post_initialization(app):
 def create_app(testing=False):
     app = Flask(__name__)
 
-    configs = {"dev": "config_dev", "test": "config_test", "prod": "config_prod", "testing": "SimuApp.config_testing"}
+    configs = {
+        "dev": "config_dev",
+        "test": "config_test",
+        "prod": "config_prod",
+        "testing": "SimuApp.config_testing",
+    }
 
     mode = os.environ.get("SIMU_MODE", "testing")
     app.config.from_object(configs[mode])
@@ -36,7 +41,7 @@ def create_app(testing=False):
         app.session_interface = MongoEngineSessionInterface(db)
 
     login_manager.init_app(app)
-    login_manager.login_view = "login"
+    login_manager.login_view = "main.login"
     login_manager.login_message = None
 
     from .models import AppRun, ApplicationLog
