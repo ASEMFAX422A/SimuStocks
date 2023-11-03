@@ -1,0 +1,6 @@
+export MONGODB_DATABASE=flaskdb
+export MONGODB_USERNAME=mongodbuser
+export MONGODB_PASSWORD=your_mongodb_root_password
+export MONGODB_HOSTNAME=localhost
+export MONGODB_PORT=27018
+export SIMU_MODE=dev
