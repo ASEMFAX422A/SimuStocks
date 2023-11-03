@@ -1,0 +1,64 @@
+{% extends '_main_simple.html' %}
+{% block title %}Registration{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-md-8 d-flex flex-column align-items-center justify-content-center">
+
+      <div class="d-flex justify-content-center py-4">
+          <a class="login-logo d-flex align-items-center w-auto" href="{{ url_for('main.index') }}">
+              <img alt="" src="{{ url_for('static', filename='img/logo.png') }}">
+          </a>
+      </div><!-- End Logo -->
+
+      <div class="card mb-3">
+
+          <div class="card-body">
+
+              <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">Registration</h5>
+                  <p class="text-center small">Bitte Registriere dich.</p>
+              </div>
+
+              <form action="{{ url_for('main.register') }}" class="row g-3 mt-2" method="POST">
+                  {{ form.hidden_tag() }}
+                  <div class="col-md-12">
+                      <div class="form-floating">
+                          {{ form.firstname(class_="form-control", placeholder="Vorname") }}
+                          <label for="firstname">Vorname</label>
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                      <div class="form-floating">
+                          {{ form.lastname(class_="form-control", placeholder="Nachname") }}
+                          <label for="lastname">Nachname</label>
+                      </div>
+                  </div>
+                  <div class="col-md-12">
+                      <div class="form-floating">
+                          {{ form.email(class_="form-control", placeholder="E-Mail") }}
+                          <label for="email">E-Mail</label>
+                      </div>
+                  </div>
+                  <div class="text-center">
+                      {{ form.btn_safe(value="Registrieren", class_="btn btn-primary mb-2 w-100") }}
+                      <button class="btn btn-secondary w-100" type="reset">Zurücksetzen</button>
+                  </div>
+                  <hr>
+                  <div class="col-12">
+                      <div class="form-check">
+                          {{ form.remember_me(class_="form-check-input") }}
+                          {{ form.remember_me.label(class_="form-check-label") }}
+                      </div>
+                  </div>
+                  <div class="col-12">
+                      <p class="small mb-0">Doch schon einen Account? <a href="{{ url_for('main.login') }}">Melde dich an</a></p>
+                  </div>
+
+              </form>
+
+          </div>
+      </div>
+  </div>
+  </div>
+{% endblock %}
