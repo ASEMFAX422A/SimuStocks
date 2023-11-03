@@ -12,7 +12,7 @@ from flask import (
     flash,
 )
 
-listings = Blueprint("c_listings", __name__)
+listings = Blueprint("listings", __name__)
 
 login_manager = None
 
