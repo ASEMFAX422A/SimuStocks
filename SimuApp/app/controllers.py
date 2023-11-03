@@ -23,7 +23,8 @@ def init_app(lm):
 def produce_debug():
     if current_user.is_authenticated:
         app.logger.debug("Debug was produced by %s" % current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        # current_user.full_name requires
+        # that we have the function in User model to return full_name
     else:
         app.logger.debug("Debug was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -33,7 +34,8 @@ def produce_debug():
 def produce_info():
     if current_user.is_authenticated:
         app.logger.info("Info was produced by %s" % current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        # current_user.full_name requires
+        # that we have the function in User model to return full_name
     else:
         app.logger.info("Info was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -44,7 +46,8 @@ def produce_warning():
     if current_user.is_authenticated:
         app.logger.warning("Warning was produced by %s" %
                            current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        # current_user.full_name requires
+        # that we have the function in User model to return full_name
     else:
         app.logger.warning("Warning was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -54,7 +57,8 @@ def produce_warning():
 def produce_error():
     if current_user.is_authenticated:
         app.logger.error("Error was produced by %s" % current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        # current_user.full_name requires
+        # that we have the function in User model to return full_name
     else:
         app.logger.error("Error was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -65,7 +69,8 @@ def produce_critical():
     if current_user.is_authenticated:
         app.logger.critical("CRITICAL was produced by %s" %
                             current_user.full_name)
-        # current_user.full_name requires we have the function in User model to return full_name
+        # current_user.full_name requires that
+        # we have the function in User model to return full_name
     else:
         app.logger.critical("CRITICAL was produced by Anonymous")
     return redirect(url_for("main.index"))
@@ -105,7 +110,7 @@ def http_error_page_not_found(e):
         )
     else:
         app.logger.info(
-            "unknown User tryed to Request %s but this doesn't exist" % request.endpoint
+            "unknown User tried to Request %s but this doesn't exist" % request.endpoint
         )
     return render_template("errors/error.html"), 404
 
