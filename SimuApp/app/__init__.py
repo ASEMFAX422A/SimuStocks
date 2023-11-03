@@ -36,7 +36,7 @@ def create_app(testing=False):
         app.session_interface = MongoEngineSessionInterface(db)
 
     login_manager.init_app(app)
-    login_manager.login_view = "login"
+    login_manager.login_view = "main.login"
     login_manager.login_message = None
 
     from .models import AppRun, ApplicationLog
