@@ -1,6 +1,10 @@
 # SimuApp/app/__init__.py
 import json
-import logging, os, threading, time, mongomock
+import logging
+import os
+import threading
+import time
+import mongomock
 from flask import Flask, session, request, g, redirect, url_for, render_template
 from flask_login import LoginManager, AnonymousUserMixin, current_user
 from flask_mongoengine import MongoEngine, MongoEngineSessionInterface
@@ -34,7 +38,8 @@ def create_app(testing=False):
     app.config.from_object(configs[mode])
 
     if testing:
-        connect(db="mydb", alias="default", mongo_client_class=mongomock.MongoClient)
+        connect(db="mydb", alias="default",
+                mongo_client_class=mongomock.MongoClient)
     else:
         db = MongoEngine()
         db.init_app(app)
@@ -90,9 +95,11 @@ def create_app(testing=False):
     alive_thread.start()
 
     from .controllers import main, init_app
+    from .c_listings import listings
 
     init_app(login_manager)
     app.register_blueprint(main)
+    app.register_blueprint(listings)
 
     post_initialization(app)
 
