@@ -13,7 +13,7 @@
     <li class="nav-heading">Stocks</li>
 
     <li class="nav-item">
-      <a href="{{ url_for('main.portfolio') }}" class="nav-link">
+      <a href="{{ url_for('c_portfolio.portfolio') }}" class="nav-link">
         <i class="bi bi-person-lines-fill"></i>
         <span>Portfolio</span>
       </a>
@@ -29,21 +29,21 @@
     <li class="nav-heading">Other</li>
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="users-profile.html">
+      <a class="nav-link collapsed" href="{{ url_for('c_pages.profile') }}">
         <i class="bi bi-person"></i>
         <span>Profile</span>
       </a>
     </li><!-- End Profile Other Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-faq.html">
+      <a class="nav-link collapsed" href="{{ url_for('c_pages.faq') }}">
         <i class="bi bi-question-circle"></i>
         <span>F.A.Q</span>
       </a>
     </li><!-- End F.A.Q Other Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-contact.html">
+      <a class="nav-link collapsed" href="{{ url_for('c_pages.contact') }}">
         <i class="bi bi-envelope"></i>
         <span>Contact</span>
       </a>
