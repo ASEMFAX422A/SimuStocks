@@ -12,11 +12,11 @@ from flask import (
     flash,
 )
 
-listings = Blueprint("listings", __name__)
+c_listings = Blueprint("c_listings", __name__)
 
 login_manager = None
 
 
-@listings.route("/stocks/listings")
-def listings():
-    return render_template("stocks/listings.html")
+# @c_listings.route("/stocks/listings")
+# def listings():
+#     return render_template("stocks/listings.html")
