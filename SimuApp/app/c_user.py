@@ -1,4 +1,4 @@
-# SimuApp/app/c_listings.py
+# SimuApp/app/c_user.py
 from .models import *
 from flask import current_app as app
 from flask import (
@@ -12,11 +12,6 @@ from flask import (
     flash,
 )
 
-c_listings = Blueprint("c_listings", __name__)
+c_user = Blueprint("c_user", __name__)
 
 login_manager = None
-
-
-@c_listings.route("/stocks/listings")
-def listings():
-    return render_template("pages/stocks/listings.html")
