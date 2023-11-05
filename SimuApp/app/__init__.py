@@ -96,12 +96,14 @@ def create_app(testing=False):
 
     from .controllers import main, init_app
     from .c_listings import c_listings
-    from .c_user import c_user
+    from .c_portfolio import c_portfolio
+    from .c_pages import c_pages
 
     init_app(login_manager)
     app.register_blueprint(main)
     app.register_blueprint(c_listings)
-    app.register_blueprint(c_user)
+    app.register_blueprint(c_pages)
+    app.register_blueprint(c_portfolio)
 
     post_initialization(app)
 
