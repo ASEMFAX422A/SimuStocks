@@ -4,7 +4,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link " href="index.html">
+      <a href="{{ url_for('main.index') }}"class="nav-link {% if not active_page == 'index' %} collapsed{% endif %}">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
@@ -13,14 +13,14 @@
     <li class="nav-heading">Stocks</li>
 
     <li class="nav-item">
-      <a href="{{ url_for('c_portfolio.portfolio') }}" class="nav-link">
-        <i class="bi bi-person-lines-fill"></i>
+      <a href="{{ url_for('c_portfolio.portfolio') }}" class="nav-link {% if not active_page == 'listings' %} collapsed{% endif %}">
+        <i class="bi bi-person"></i>
         <span>Portfolio</span>
       </a>
     </li>
 
     <li class="nav-item">
-      <a href="{{ url_for('c_listings.listings') }}" class="nav-link">
+      <a href="{{ url_for('c_listings.listings') }}" class="nav-link {% if not active_page == 'portfolio' %} collapsed{% endif %}">
         <i class="bi bi-bank"></i>
         <span>Listings</span>
       </a>
