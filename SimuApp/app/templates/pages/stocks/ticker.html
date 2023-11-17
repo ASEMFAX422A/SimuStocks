@@ -1,0 +1,13 @@
+{% extends '_main.html' %}
+{% set active_page = "ticker" %}
+{% block title %}Ticker{% endblock %}
+
+{% block body %}
+<div class="pagetitle">
+  <h1>Ticker</h1> <!-- Hinter "Ticker" den aktuellen Namen vom Ticker einfügen
+</div>
+
+<p>{{ ticker.ticker }}</p>
+<p>{{ ticker.data }}</p>
+
+{% endblock %}
