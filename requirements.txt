@@ -38,8 +38,8 @@ sentinels==1.0.0
 simple-websocket==1.0.0
 six==1.16.0
 tomli==2.0.1
+Werkzeug==2.3.8
 typing-extensions==4.8.0
-Werkzeug==2.2.2
 wsproto==1.2.0
 wtforms==3.1.0
 zipp==3.17.0
