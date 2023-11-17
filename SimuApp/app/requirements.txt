@@ -26,7 +26,7 @@ python-engineio==4.8.0
 python-socketio==5.10.0
 simple-websocket==1.0.0
 tomli==2.0.1
-Werkzeug==2.2.2
+Werkzeug==2.3.8
 wsproto==1.2.0
 WTForms==3.1.0
 zipp==3.17.0
