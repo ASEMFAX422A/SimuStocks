@@ -17,7 +17,7 @@ services:
       MONGODB_HOSTNAME: mongodb
       MONGODB_PORT: 27017
     ports:
-      - "5000:5000"
+      - "5000"
     volumes:
       - ./SimuApp:/var/www
     depends_on:
