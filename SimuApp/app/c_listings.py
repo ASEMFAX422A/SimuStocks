@@ -17,9 +17,13 @@ c_listings = Blueprint("c_listings", __name__)
 login_manager = None
 
 
-@c_listings.route("/stocks/listings/<ticker_name>")
 @c_listings.route("/stocks/listings/")
-def listings(ticker_name):
+def listings():
+    stocks = Stocks.objects()
+    return render_template("pages/stocks/listings.html", stocks=stocks)
+
+
+@c_listings.route("/stocks/listings/<ticker_name>")
+def listings_ticker(ticker_name):
     ticker = Stocks.objects(ticker=ticker_name).first_or_404()
-    data = ticker.data
     return render_template("pages/stocks/listings.html", ticker=ticker)
