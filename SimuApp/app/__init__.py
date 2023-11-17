@@ -38,8 +38,7 @@ def create_app(testing=False):
     app.config.from_object(configs[mode])
 
     if testing:
-        connect(db="mydb", alias="default",
-                mongo_client_class=mongomock.MongoClient)
+        connect(db="mydb", alias="default", mongo_client_class=mongomock.MongoClient)
     else:
         db = MongoEngine()
         db.init_app(app)
@@ -95,11 +94,15 @@ def create_app(testing=False):
     alive_thread.start()
 
     from .controllers import main, init_app
-    from .c_listings import listings
+    from .c_listings import c_listings
+    from .c_portfolio import c_portfolio
+    from .c_pages import c_pages
 
     init_app(login_manager)
     app.register_blueprint(main)
-    app.register_blueprint(listings)
+    app.register_blueprint(c_listings)
+    app.register_blueprint(c_portfolio)
+    app.register_blueprint(c_pages)
 
     post_initialization(app)
 

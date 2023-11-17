@@ -1,6 +1,5 @@
-# SimuApp/app/c_listings.py
+# SimuApp/app/c_portfolio.py
 from .models import *
-from . import db
 from flask import current_app as app
 from flask import (
     Blueprint,
@@ -13,11 +12,11 @@ from flask import (
     flash,
 )
 
-c_listings = Blueprint("c_listings", __name__)
+c_portfolio = Blueprint("c_portfolio", __name__)
 
 login_manager = None
 
 
-@c_listings.route("/stocks/listings")
-def listings():
-    return render_template("pages/stocks/listings.html")
+@c_portfolio.route("/portfolio")
+def portfolio():
+    return render_template("pages/stocks/portfolio.html")

@@ -168,16 +168,6 @@ def logout():
     return redirect(request.args.get("next") or "/")
 
 
-@main.route("/listings")
-def listings():
-    return render_template("stocks/listings.html")
-
-
-@main.route("/portfolio")
-def portfolio():
-    return render_template("stocks/portfolio.html")
-
-
 @main.errorhandler(401)
 def http_error_unauthorized(e):
     return render_template("errors/error.html"), 401
@@ -204,6 +194,7 @@ def http_error_page_not_found(e):
 
 @main.errorhandler(500)
 def http_error_internal_server_error(e):
+    app.logger.error("Server Error: %s" % e)
     return render_template("errors/error.html"), 500
 
 
