@@ -62,6 +62,13 @@ class ApplicationLog(db.DynamicDocument):
     appRun = db.ReferenceField("AppRun", required=True)
 
 
+class Stocks(db.DynamicDocument):
+    meta = {"collection": "Prices"}
+
+    ticker = db.StringField(required=True)
+    data = db.ListField()
+
+
 class User(UserMixin, db.Document, SimuBaseModell):
     firstname = db.StringField(required=True)
     lastname = db.StringField(required=True)
