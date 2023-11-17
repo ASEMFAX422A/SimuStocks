@@ -68,14 +68,6 @@ class Stocks(db.DynamicDocument):
     ticker = db.StringField(required=True)
     data = db.ListField()
 
-    @property
-    def ticker_name(self):
-        return self.ticker
-
-    @property
-    def ticker_data(self):
-        return self.data
-
 
 class User(UserMixin, db.Document, SimuBaseModell):
     firstname = db.StringField(required=True)
