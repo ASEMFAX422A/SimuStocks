@@ -102,8 +102,8 @@ def create_app(testing=False):
     init_app(login_manager)
     app.register_blueprint(main)
     app.register_blueprint(c_listings)
-    app.register_blueprint(c_pages)
     app.register_blueprint(c_portfolio)
+    app.register_blueprint(c_pages)
 
     post_initialization(app)
 

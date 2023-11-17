@@ -1,5 +1,6 @@
 # SimuApp/app/c_listings.py
 from .models import *
+from . import db
 from flask import current_app as app
 from flask import (
     Blueprint,
