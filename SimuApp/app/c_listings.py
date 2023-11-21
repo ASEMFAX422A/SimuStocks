@@ -16,18 +16,15 @@ c_listings = Blueprint("c_listings", __name__)
 
 login_manager = None
 
-prices_list = []
-timestamp_list = []
-
-
 @c_listings.route("/stocks/listings/")
 def listings():
     stocks = Stocks.objects()
     return render_template("pages/stocks/listings.html", stocks=stocks)
 
-
 @c_listings.route("/stocks/ticker/<ticker_name>")
 def listings_ticker(ticker_name):
+    prices_list = []
+    timestamp_list = []
     ticker = Stocks.objects(ticker=ticker_name).first_or_404()
 
     if ticker:
