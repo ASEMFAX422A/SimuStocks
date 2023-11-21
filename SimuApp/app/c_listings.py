@@ -32,7 +32,12 @@ def listings_ticker(ticker_name):
 
     if ticker:
         for data_point in ticker.data:
-            prices_list.append(data_point['price'])
-            timestamp_list.append(data_point['timestamp'])
+            prices_list.append(data_point["price"])
+            timestamp_list.append(data_point["timestamp"])
 
-    return render_template("pages/stocks/ticker.html", ticker=ticker, prices_list=prices_list, timestamp_list=timestamp_list)
+    return render_template(
+        "pages/stocks/ticker.html",
+        ticker=ticker,
+        prices_list=prices_list,
+        timestamp_list=timestamp_list,
+    )
