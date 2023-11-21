@@ -6,7 +6,8 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ ticker.ticker }}</h5>
+                      <a href={{ url_for('c_listings.listings_ticker', ticker_name=ticker.ticker) }} class="card-title">{{
+                        ticker.ticker }}</a>
 
                         <!-- Line Chart -->
                         <div id="lineChart-{{ ticker.id }}"></div>
