@@ -69,6 +69,17 @@ class Stocks(db.DynamicDocument):
     data = db.ListField()
 
 
+class DataEntry(db.EmbeddedDocument):
+    price = db.FloatField()
+    timestamp = db.StringField()
+
+
+class Prices(db.DynamicDocument):
+    _id = db.StringField(primary_key=True)
+    ticker = db.StringField()
+    data = db.ListField(db.EmbeddedDocumentField(DataEntry))
+
+
 class User(UserMixin, db.Document, SimuBaseModell):
     firstname = db.StringField(required=True)
     lastname = db.StringField(required=True)
