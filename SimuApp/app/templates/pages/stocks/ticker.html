@@ -1,0 +1,14 @@
+{% extends '_main.html' %}
+{% set active_page = "ticker" %}
+{% block title %}Ticker{% endblock %}
+
+{% block body %}
+<div class="pagetitle">
+  <h1>Ticker</h1> 
+</div>
+
+<h1>{{ ticker.ticker }}</h1>
+<p>{{ prices_list[1] }}</p>
+<p>{{ timestamp_list[1] }}</p>
+
+{% endblock %}
