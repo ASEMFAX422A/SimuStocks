@@ -19,4 +19,4 @@ login_manager = None
 
 @c_portfolio.route("/portfolio")
 def portfolio():
-    return render_template("pages/stocks/portfolio.html")
+    return render_template("pages/user/portfolio.html")
