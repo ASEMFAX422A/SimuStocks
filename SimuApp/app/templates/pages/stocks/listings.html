@@ -1,4 +1,5 @@
 {% extends '_main.html' %}
+{%- from 'macros/stock_list.html' import build_list %}
 {% set active_page = "listings" %}
 {% block title %}Stock Listings{% endblock %}
 
@@ -7,7 +8,7 @@
   <h1>Listings</h1>
 </div>
 
-<p>{{ ticker.ticker }}</p>
-<p>{{ ticker.data }}</p>
+{{ build_list(stocks) }}
+
 
 {% endblock %}
