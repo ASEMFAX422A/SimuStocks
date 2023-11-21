@@ -16,7 +16,18 @@ def create_job(ticker):
 
 if __name__ == "__main__":
     print("staring logger")
-    tickers = ["AAPL", "MSFT", "GOOGL", "EOAN.DE", "TSLA", "AMZN", "NVDA", "INTC", "PYPL", "RBLX"]
+    tickers = [
+        "AAPL",
+        "MSFT",
+        "GOOGL",
+        "EOAN.DE",
+        "TSLA",
+        "AMZN",
+        "NVDA",
+        "INTC",
+        "PYPL",
+        "RBLX",
+    ]
     # TODO: Put all wanted Companys into Database
 
     for ticker in tickers:
