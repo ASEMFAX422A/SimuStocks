@@ -58,7 +58,8 @@ def produce_info():
 @main.route("/produce_warning")
 def produce_warning():
     if current_user.is_authenticated:
-        app.logger.warning("Warning was produced by %s" % current_user.full_name)
+        app.logger.warning("Warning was produced by %s" %
+                           current_user.full_name)
         # current_user.full_name requires
         # that we have the function in User model to return full_name
     else:
@@ -80,7 +81,8 @@ def produce_error():
 @main.route("/produce_critical")
 def produce_critical():
     if current_user.is_authenticated:
-        app.logger.critical("CRITICAL was produced by %s" % current_user.full_name)
+        app.logger.critical("CRITICAL was produced by %s" %
+                            current_user.full_name)
         # current_user.full_name requires that
         # we have the function in User model to return full_name
     else:
@@ -95,7 +97,8 @@ def index():
 
 @main.route("/login", methods=["GET", "POST"])
 def login():
-    session["redirect_next"] = request.args.get("next", session.get("redirect_next"))
+    session["redirect_next"] = request.args.get(
+        "next", session.get("redirect_next"))
     if not is_safe_url(session["redirect_next"]):
         return abort(400)
     if request.method == "GET":
@@ -123,7 +126,8 @@ def login():
 
 @main.route("/register", methods=["GET", "POST"])
 def register():
-    session["redirect_next"] = request.args.get("next", session.get("redirect_next"))
+    session["redirect_next"] = request.args.get(
+        "next", session.get("redirect_next"))
     if request.method == "GET":
         form = RegisterForm()
         return render_template("accounting/register.html", form=form)
@@ -141,7 +145,8 @@ def register():
 
                 # noinspection PyArgumentList
                 user.update(
-                    push__changelog=ObjectChangelog(note="Registration", data={})
+                    push__changelog=ObjectChangelog(
+                        note="Registration", data={})
                 )
 
             login_user(user, remember=form.remember_me.data)
@@ -163,7 +168,8 @@ def logout():
         session.pop(key, None)
 
     # Tell Flask-Principal the user is anonymous
-    identity_changed.send(app._get_current_object(), identity=AnonymousIdentity())
+    identity_changed.send(app._get_current_object(),
+                          identity=AnonymousIdentity())
 
     return redirect(request.args.get("next") or "/")
 
