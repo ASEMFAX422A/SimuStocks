@@ -9,6 +9,24 @@
         <a href={{ url_for('c_listings.listings_ticker', ticker_name=ticker.ticker) }} class="card-title">{{
           ticker.ticker }}</a>
 
+          {% if 'data' in ticker %}
+          {% set unique_dates = {} %}
+          {% for data_point in ticker.data %}
+            {% set date_key = data_point.timestamp.split('T')[0] %}
+
+            {% if date_key not in unique_dates %}
+              {% set unique_dates[date_key] = true %}
+              <p>
+                Datum: {{ date_key|date('d.m') }},
+                Preis: ${{ '%.2f'|format(data_point.price) }},
+                Formatierter Preis: ${{ '%.2f'|format(data_point.price|format_price) }}
+              </p>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <p>Keine Daten verfügbar</p>
+        {% endif %}
+        
         <!-- Line Chart -->
         <div id="lineChart-{{ ticker.id }}"></div>
 

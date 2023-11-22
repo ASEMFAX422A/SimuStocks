@@ -3,6 +3,7 @@ import cryptocode
 
 from flask import current_app as app
 from . import db
+from .c_listings import format_timestamp  # Import the Jinja filter function
 
 from datetime import datetime, timedelta, date, time
 from flask_mongoengine import BaseQuerySet
@@ -66,18 +67,18 @@ class Stocks(db.DynamicDocument):
     meta = {"collection": "Prices"}
 
     ticker = db.StringField(required=True)
-    data = db.ListField()
+    data = db.ListField(db.EmbeddedDocumentField('DataEntry'))
 
 
 class DataEntry(db.EmbeddedDocument):
     price = db.FloatField()
-    timestamp = db.StringField()
+    timestamp = db.DateTimeField(default=datetime.now) 
 
 
 class Prices(db.DynamicDocument):
     _id = db.StringField(primary_key=True)
     ticker = db.StringField()
-    data = db.ListField(db.EmbeddedDocumentField(DataEntry))
+    data = db.ListField(db.EmbeddedDocumentField('DataEntry'))
 
 
 class User(UserMixin, db.Document, SimuBaseModell):
