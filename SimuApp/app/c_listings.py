@@ -1,27 +1,29 @@
 # SimuApp/app/c_listings.py
 from .models import Stocks
-from flask import current_app as app
 from flask import (
     Blueprint,
+    current_app as app,
     render_template,
-    redirect,
-    url_for,
-    request,
-    session,
     abort,
-    flash,
 )
 
 c_listings = Blueprint("c_listings", __name__)
+login_manager = None  
 
-login_manager = None
 
+def format_price(price):
+    return f"Formatierter Preis: {price}"
+
+def format_timestamp(timestamp):
+    return f"Formatierter Timestamp: {timestamp}"
+
+app.jinja_env.filters['format_price'] = format_price
+app.jinja_env.filters['format_timestamp'] = format_timestamp
 
 @c_listings.route("/stocks/listings/")
 def listings():
     stocks = Stocks.objects()
     return render_template("pages/stocks/listings.html", stocks=stocks)
-
 
 @c_listings.route("/stocks/ticker/<ticker_name>")
 def listings_ticker(ticker_name):
