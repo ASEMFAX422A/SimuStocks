@@ -31,7 +31,9 @@ def redirect_url(default="index"):
 
 # SimuApp/app/utils.py
 
-
+def format_timestamp(timestamp):
+    return f"Formatierter Zeitstempel: {timestamp}"
+    
 def safe_cast(val, to_type, app, default=None):
     if type(val) == to_type:
         app.logger.debug(
@@ -43,3 +45,6 @@ def safe_cast(val, to_type, app, default=None):
     except (ValueError, TypeError):
         app.logger.critical("Error on converting a value")
         return default
+    
+
+

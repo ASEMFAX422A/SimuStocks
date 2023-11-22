@@ -1,10 +1,8 @@
-# SimuApp/app/c_listings.py
-from .models import Stocks, DataEntry  # Import DataEntry
-from flask import current_app as app, render_template
+from flask import Blueprint, current_app as app, render_template
+from .models import Stocks, DataEntry
+from .utils import format_timestamp
 
 c_listings = Blueprint("c_listings", __name__)
-
-login_manager = None
 
 # Hier füge die Jinja-Filter hinzu
 def format_price(price):

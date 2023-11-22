@@ -15,6 +15,9 @@ from logging.handlers import SMTPHandler
 from datetime import datetime
 from mongomock import MongoClient as MockMongoClient
 from mongoengine import connect
+from .models import DataEntry
+
+
 
 db = MongoEngine()
 login_manager = LoginManager()

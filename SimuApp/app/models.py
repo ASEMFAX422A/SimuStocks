@@ -3,7 +3,8 @@ import cryptocode
 
 from flask import current_app as app
 from . import db
-from .c_listings import format_timestamp  # Import the Jinja filter function
+from . import DataEntry
+from .utils import format_timestamp
 
 from datetime import datetime, timedelta, date, time
 from flask_mongoengine import BaseQuerySet
