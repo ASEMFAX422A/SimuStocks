@@ -1,4 +1,5 @@
 {% extends '_main.html' %}
+{%- from 'macros/ticker_graph.html' import show_graph %}
 {% set active_page = "ticker" %}
 {% block title %}Ticker{% endblock %}
 
@@ -8,7 +9,5 @@
 </div>
 
 <h1>{{ ticker.ticker }}</h1>
-<p>{{ prices_list[1] }}</p>
-<p>{{ timestamp_list[1] }}</p>
-
+{{ show_graph(ticker) }}
 {% endblock %}
