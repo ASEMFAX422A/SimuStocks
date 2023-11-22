@@ -38,7 +38,8 @@ def create_app(testing=False):
     app.config.from_object(configs[mode])
 
     if testing:
-        connect(db="mydb", alias="default", mongo_client_class=mongomock.MongoClient)
+        connect(db="mydb", alias="default",
+                mongo_client_class=mongomock.MongoClient)
     else:
         db = MongoEngine()
         db.init_app(app)
