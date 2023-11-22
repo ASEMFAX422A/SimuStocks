@@ -20,4 +20,6 @@ login_manager = None
 @c_portfolio.route("/portfolio")
 def portfolio():
     current_user = User.objects
-    return render_template("pages/user/portfolio.html", current_user_full_name=current_user)
+    return render_template(
+        "pages/user/portfolio.html", current_user_full_name=current_user
+    )
