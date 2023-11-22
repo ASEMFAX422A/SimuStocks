@@ -1,0 +1,39 @@
+{% macro show_graph(ticker) %}
+
+<!-- Line Chart -->
+<div id="lineChart-{{ ticker.id }}"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    new ApexCharts(document.querySelector("#lineChart-{{ ticker.id }}"), {
+      series: [{
+        name: "Desktops",
+        data: [{% for price in ticker.data[-8:] %} {{price['price'] }}, {% endfor %} ]
+              }],
+    chart: {
+    height: 350,
+    type: 'line',
+    zoom: {
+      enabled: false
+    }
+  },
+    dataLabels: {
+    enabled: false
+  },
+    stroke: {
+    curve: 'straight'
+  },
+    grid: {
+    row: {
+      colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+      opacity: 0.5
+    },
+  },
+    xaxis: {
+      categories: [{% for price in ticker.data[-8:] %} '{{ price['timestamp'] }}', {% endfor %}],
+              }
+            }).render();
+          });
+</script>
+<!-- End Line Chart -->
+{% endmacro %}
