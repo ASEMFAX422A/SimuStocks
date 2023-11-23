@@ -11,11 +11,12 @@ from flask_login import UserMixin, current_user
 
 class TimestampedModel(object):
     """Mixin for keeping track of created and last modified times"""
+
     created = db.DateTimeField(default=datetime.now)
     modified = db.DateTimeField(default=datetime.now)
 
 
-class SimuBaseModell():
+class SimuBaseModell:
     enabled = db.BooleanField(default=True)
 
     @classmethod
@@ -29,16 +30,18 @@ class SimuBaseModell():
 
 class ObjectChangelog(db.EmbeddedDocument, SimuBaseModell):
     time = db.DateTimeField(default=datetime.now)
-    modified_by = db.ReferenceField('User')
+    modified_by = db.ReferenceField("User")
     note = db.StringField()
     data = db.DictField()
 
 
 class AppRun(db.DynamicDocument):
-    meta = {'collection': 'app_run'}
+    meta = {"collection": "app_run"}
     time = db.DateTimeField(default=datetime.now)
 
-    version = db.StringField(required=True)  # Like 1.0.0-DEV-202012201200 (the last is date and time)
+    version = db.StringField(
+        required=True
+    )  # Like 1.0.0-DEV-202012201200 (the last is date and time)
     # Format of the date is YYYY MM DD HH MM SS without blanks
 
     version_id = db.StringField(required=True)  # Version Like 1.0.0
@@ -48,7 +51,7 @@ class AppRun(db.DynamicDocument):
 
 
 class ApplicationLog(db.DynamicDocument):
-    meta = {'collection': 'application_logs'}
+    meta = {"collection": "application_logs"}
     time = db.DateTimeField(default=datetime.now)  # created
 
     levelname = db.StringField(required=True)  # The levelname of the Log.
@@ -56,7 +59,25 @@ class ApplicationLog(db.DynamicDocument):
 
     module = db.StringField(required=True)  # module
     msg = db.StringField(required=True)  # msg
-    appRun = db.ReferenceField('AppRun', required=True)
+    appRun = db.ReferenceField("AppRun", required=True)
+
+
+class Stocks(db.DynamicDocument):
+    meta = {"collection": "Prices"}
+
+    ticker = db.StringField(required=True)
+    data = db.ListField()
+
+
+class DataEntry(db.EmbeddedDocument):
+    price = db.FloatField()
+    timestamp = db.StringField()
+
+
+class Prices(db.DynamicDocument):
+    _id = db.StringField(primary_key=True)
+    ticker = db.StringField()
+    data = db.ListField(db.EmbeddedDocumentField(DataEntry))
 
 
 class User(UserMixin, db.Document, SimuBaseModell):
@@ -83,4 +104,3 @@ class User(UserMixin, db.Document, SimuBaseModell):
     @property
     def full_name_rev(self):
         return self.firstname + ", " + self.lastname
-

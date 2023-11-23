@@ -1,0 +1,13 @@
+{% extends '_main.html' %}
+{%- from 'macros/show_graph.html' import show_graph %}
+{% set active_page = "ticker" %}
+{% block title %}Ticker{% endblock %}
+
+{% block body %}
+<div class="pagetitle">
+  <h1>Ticker</h1> 
+</div>
+
+<h1>{{ ticker.ticker }}</h1>
+{{ show_graph(ticker) }}
+{% endblock %}
